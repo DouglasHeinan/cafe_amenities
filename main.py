@@ -4,13 +4,13 @@ import random
 
 app = Flask(__name__)
 
-##Connect to Database
+# Connect to Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-##Cafe TABLE Configuration
+# Cafe TABLE Configuration
 class Cafe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True, nullable=False)
@@ -102,7 +102,7 @@ def change_price(cafe_id):
 
 
 # HTTP DELETE - Delete Record
-@app.route("/report-closed/<int: cafe_id>", methods=["DELETE"])
+@app.route("/report-closed/<cafe_id>", methods=["DELETE"])
 def delete_cafe(cafe_id):
     api_key = request.args.get("api_key")
     if api_key == "TopSecretAPIKey":
